@@ -1,24 +1,15 @@
-// import { Button } from "@/components/ui/button"
-// import React from "react"
+import { Button } from "@/components/ui/button"
+import React from "react"
 
 function App() {
-  const topBar = (
-    <div className="h-10 bg-blue-500">Up bar</div>
-  )
-
-  const statusBar = (
-    <div className="h-10 bg-red-500">Status bar</div>
-  )
-
-  const content = (
-    <div className="flex-grow">Main part</div>
-  )
+  const [count, setCount] = React.useState(0)
 
   return (
-    <div className="h-screen flex flex-col">
-      {topBar}
-      {content}
-      {statusBar}
+    <div className="min-h-screen bg-white grid place-items-center mx-auto py-8">
+      <div className="text-blue-900 text-2xl font-bold flex flex-col items-center space-y-4">
+        <h1>Vite + React + TS + Tailwind + shadcn/ui</h1>
+        <Button onClick={() => setCount(count + 1)}>Count up ({count})</Button>
+      </div>
     </div>
   )
 }

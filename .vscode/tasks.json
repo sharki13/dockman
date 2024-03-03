@@ -33,7 +33,7 @@
         "-gcflags",
         "all=-N -l",
         "-o",
-        "build/bin/dockmaster.exe"
+        "build/bin/dockman.exe"
       ]
     },
     {
@@ -68,7 +68,7 @@
         "-gcflags",
         "all=-N -l",
         "-o",
-        "build/bin/dockmaster.exe"
+        "build/bin/dockman.exe"
       ]
     },
     {
@@ -103,7 +103,7 @@
         "-gcflags",
         "all=-N -l",
         "-o",
-        "build/bin/dockmaster.exe"
+        "build/bin/dockman.exe"
       ]
     }
   ]

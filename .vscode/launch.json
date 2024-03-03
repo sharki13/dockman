@@ -2,29 +2,29 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Wails: Production dockmaster",
+      "name": "Wails: Production dockman",
       "type": "go",
       "request": "launch",
       "mode": "exec",
-      "program": "${workspaceFolder}/build/bin/dockmaster.exe",
+      "program": "${workspaceFolder}/build/bin/dockman.exe",
       "preLaunchTask": "build",
       "cwd": "${workspaceFolder}"
     },
     {
-      "name": "Wails: Debug dockmaster",
+      "name": "Wails: Debug dockman",
       "type": "go",
       "request": "launch",
       "mode": "exec",
-      "program": "${workspaceFolder}/build/bin/dockmaster.exe",
+      "program": "${workspaceFolder}/build/bin/dockman.exe",
       "preLaunchTask": "build debug",
       "cwd": "${workspaceFolder}"
     },
     {
-      "name": "Wails: Dev dockmaster",
+      "name": "Wails: Dev dockman",
       "type": "go",
       "request": "launch",
       "mode": "exec",
-      "program": "${workspaceFolder}/build/bin/dockmaster.exe",
+      "program": "${workspaceFolder}/build/bin/dockman.exe",
       "preLaunchTask": "build dev",
       "cwd": "${workspaceFolder}"
     }
