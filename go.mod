@@ -1,4 +1,4 @@
-module changeme
+module dockman
 
 go 1.21
 
