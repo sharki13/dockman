@@ -18,6 +18,10 @@ func (d *DockerContainer) GetCreated() time.Time {
 	return d.Created
 }
 
+func (d *DockerContainer) GetName() string {
+	return d.Name
+}
+
 func ParseDockerContainerFromJSON(in string) []DockerContainer {
 	out := []DockerContainer{}
 

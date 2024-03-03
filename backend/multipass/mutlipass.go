@@ -24,6 +24,10 @@ func (m *MultipassVM) GetCreated() time.Time {
 	return m.Created
 }
 
+func (m *MultipassVM) GetName() string {
+	return m.ID
+}
+
 func GetMultipassVMs() []common.VM {
 	cmd := cmd.Command{
 		Cmd:  "multipass",
