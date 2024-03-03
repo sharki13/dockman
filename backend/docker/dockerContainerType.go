@@ -1,12 +1,13 @@
-package backend
+package docker
 
 import (
+	"dockman/backend/common"
 	"encoding/json"
 	"time"
 )
 
-func (d *DockerContainer) GetType() VMType {
-	return VMTypeDocker
+func (d *DockerContainer) GetType() common.VMType {
+	return common.VMTypeDocker
 }
 
 func (d *DockerContainer) GetID() string {

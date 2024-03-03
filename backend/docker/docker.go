@@ -1,11 +1,12 @@
-package backend
+package docker
 
 import (
 	"dockman/backend/cmd"
+	"dockman/backend/common"
 	"strings"
 )
 
-func GetDockerContainers() []VM {
+func GetDockerContainers() []common.VM {
 	dockerCmd := cmd.Command{
 		Cmd:  "docker",
 		Args: []string{"ps"},
@@ -19,7 +20,7 @@ func GetDockerContainers() []VM {
 	containers := parseDockerContainers(out)
 
 	// Convert to VM interface
-	ret := make([]VM, 0)
+	ret := make([]common.VM, 0)
 	for _, container := range containers {
 		ret = append(ret, &container)
 	}

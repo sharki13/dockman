@@ -1,7 +1,8 @@
-package backend
+package multipass
 
 import (
 	"dockman/backend/cmd"
+	"dockman/backend/common"
 	"encoding/json"
 	"time"
 )
@@ -11,8 +12,8 @@ type MultipassVM struct {
 	Created time.Time
 }
 
-func (m *MultipassVM) GetType() VMType {
-	return VMTypeMultipass
+func (m *MultipassVM) GetType() common.VMType {
+	return common.VMTypeMultipass
 }
 
 func (m *MultipassVM) GetID() string {
@@ -23,7 +24,7 @@ func (m *MultipassVM) GetCreated() time.Time {
 	return m.Created
 }
 
-func GetMultipassVMs() []VM {
+func GetMultipassVMs() []common.VM {
 	cmd := cmd.Command{
 		Cmd:  "multipass",
 		Args: []string{"list", "--format", "json"},
@@ -48,7 +49,7 @@ type multipassListResponseInternal struct {
 	List []multipassVMInternal `json:"list"`
 }
 
-func parseMultipassVMs(out string) []VM {
+func parseMultipassVMs(out string) []common.VM {
 	vms := multipassListResponseInternal{}
 
 	err := json.Unmarshal([]byte(out), &vms)
@@ -56,7 +57,7 @@ func parseMultipassVMs(out string) []VM {
 		panic(err)
 	}
 
-	ret := make([]VM, 0)
+	ret := make([]common.VM, 0)
 	for _, vm := range vms.List {
 		// cast multipassVM to VM
 		ret = append(ret, &MultipassVM{
