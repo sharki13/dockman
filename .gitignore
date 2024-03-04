@@ -20,4 +20,7 @@
 # Go workspace file
 go.work
 
-# Build out
+build/bin
+
+# Mac staff
+.DS_Store
