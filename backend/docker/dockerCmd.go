@@ -3,25 +3,32 @@ package docker
 import (
 	"dockman/backend/cmd"
 	"dockman/backend/common"
+	"errors"
 	"strings"
 )
+
+var Err_DockerNotRunning = errors.New("docker daemon not running")
 
 // GetDockerContainers retrieves a list of Docker containers.
 // It executes the "docker ps" command and parses the output to obtain the container information.
 // If the Docker daemon is not running, it returns an empty list of containers.
 // It returns a slice of common.VM, which is an interface representing a virtual machine.
-func GetDockerContainers() []common.VM {
+func GetDockerContainers() ([]common.VM, error) {
 	dockerCmd := cmd.Command{
 		Cmd:  "docker",
 		Args: []string{"ps"},
 	}
 
-	out, err := dockerCmd.Exec(dockerCmd)
+	out, err := dockerCmd.Exec()
 	if err != nil {
+		if err == cmd.Err_CommandNotFound {
+			return []common.VM{}, err
+		}
+
 		// if out contains "this error may indicate that the docker daemon is not running"
 		// return an empty list of containers
 		if strings.Contains(out, "this error may indicate that the docker daemon is not running") {
-			return []common.VM{}
+			return []common.VM{}, Err_DockerNotRunning
 		}
 		panic(err)
 	}
@@ -34,7 +41,7 @@ func GetDockerContainers() []common.VM {
 		ret = append(ret, &container)
 	}
 
-	return ret
+	return ret, nil
 }
 
 // parseDockerContainers parses the output of the "docker ps" command to obtain the container IDs.
@@ -60,7 +67,7 @@ func parseDockerContainers(out string) []DockerContainer {
 			Cmd:  "docker",
 			Args: []string{"inspect", id},
 		}
-		out, err := dockerInspectCmd.Exec(dockerInspectCmd)
+		out, err := dockerInspectCmd.Exec()
 		if err != nil {
 			continue
 		}

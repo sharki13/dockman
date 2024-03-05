@@ -28,18 +28,22 @@ func (m *MultipassVM) GetName() string {
 	return m.ID
 }
 
-func GetMultipassVMs() []common.VM {
-	cmd := cmd.Command{
+func GetMultipassVMs() ([]common.VM, error) {
+	mutlipassListCommand := cmd.Command{
 		Cmd:  "multipass",
 		Args: []string{"list", "--format", "json"},
 	}
 
-	out, err := cmd.Exec(cmd)
+	out, err := mutlipassListCommand.Exec()
 	if err != nil {
+		if err == cmd.Err_CommandNotFound {
+			return []common.VM{}, err
+		}
+
 		panic(err)
 	}
 
-	return parseMultipassVMs(out)
+	return parseMultipassVMs(out), nil
 }
 
 type multipassVMInternal struct {
