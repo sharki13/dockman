@@ -2,6 +2,7 @@ package common
 
 import "time"
 
+// VMType represents the type of a virtual machine.
 type VMType string
 
 const (
@@ -11,6 +12,7 @@ const (
 	VMTypeMultipass VMType = "multipass"
 )
 
+// Status represents the status of a virtual machine.
 type Status string
 
 const (
@@ -23,10 +25,19 @@ const (
 	StatusBroken   Status = "broken"
 )
 
+// VM is an interface that represents a virtual machine.
 type VM interface {
+	// returns the type of the virtual machine
 	GetType() VMType
+
+	// returns the ID of the virtual machine
 	GetID() string
+
+	// returns the creation time of the virtual machine
 	GetCreated() time.Time
+
+	// returns the name of the virtual machine
 	GetName() string
+
 	// GetStatus() string
 }
