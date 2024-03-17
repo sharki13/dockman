@@ -39,7 +39,6 @@ func GetMultipassVMs() ([]common.VM, error) {
 		if err == cmd.Err_CommandNotFound {
 			return []common.VM{}, err
 		}
-
 		panic(err)
 	}
 

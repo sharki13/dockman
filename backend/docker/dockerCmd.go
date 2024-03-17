@@ -3,11 +3,9 @@ package docker
 import (
 	"dockman/backend/cmd"
 	"dockman/backend/common"
-	"errors"
+	"fmt"
 	"strings"
 )
-
-var Err_DockerNotRunning = errors.New("docker daemon not running")
 
 // GetDockerContainers retrieves a list of Docker containers.
 // It executes the "docker ps" command and parses the output to obtain the container information.
@@ -27,9 +25,10 @@ func GetDockerContainers() ([]common.VM, error) {
 
 		// if out contains "this error may indicate that the docker daemon is not running"
 		// return an empty list of containers
-		if strings.Contains(out, "this error may indicate that the docker daemon is not running") {
-			return []common.VM{}, Err_DockerNotRunning
+		if strings.Contains(out, "Cannot connect to the Docker") {
+			return []common.VM{}, common.Err_DockerNotRunning
 		}
+		fmt.Printf("Panic: %s\n", err)
 		panic(err)
 	}
 

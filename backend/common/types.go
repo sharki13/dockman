@@ -1,6 +1,9 @@
 package common
 
-import "time"
+import (
+	"errors"
+	"time"
+)
 
 // VMType represents the type of a virtual machine.
 type VMType string
@@ -41,3 +44,6 @@ type VM interface {
 
 	// GetStatus() string
 }
+
+var Err_DockerNotRunning = errors.New("docker daemon not running")
+var Err_CommandNotFound = errors.New("command not found")
