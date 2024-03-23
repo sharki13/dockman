@@ -61,6 +61,9 @@ func (w *DockerWrapper) GetInstacnes() ([]Instance, error) {
 
 	out, err := psCommand.Exec()
 	if err != nil {
+		if strings.Contains(out, "docker daemon is not running") {
+			return ret, Err_DockerNotRunning
+		}
 		return ret, err
 	}
 

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/sharki13/dockman/backend/cmd"
 	"github.com/sharki13/dockman/backend/wrapper"
 )
 
@@ -12,7 +13,7 @@ func main() {
 	fmt.Printf("Wrapper type: %s\n", dockerWrapper.GetType())
 
 	instances, err := dockerWrapper.GetInstacnes()
-	if err != nil {
+	if err != nil && err != cmd.Err_CommandNotFound && err != wrapper.Err_DockerNotRunning {
 		fmt.Println(err)
 		return
 	}
