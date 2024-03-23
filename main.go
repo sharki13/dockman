@@ -4,6 +4,8 @@ package main
 
 import (
 	"embed"
+	"flag"
+	"fmt"
 	"log"
 
 	"github.com/wailsapp/wails/v2"
@@ -14,6 +16,10 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/options/windows"
 )
 
+var (
+	cliFlag = flag.Bool("cli", false, "Run in CLI mode")
+)
+
 //go:embed all:frontend/dist
 var assets embed.FS
 
@@ -22,6 +28,27 @@ var icon []byte
 
 func main() {
 	// Create an instance of the app structure
+
+	flag.Parse()
+
+	if *cliFlag {
+		cliStart()
+	} else {
+		guiStart()
+	}
+}
+
+func cliStart() {
+	fmt.Printf("CLI mode\n")
+	fmt.Printf("CLI mode\n")
+	fmt.Printf("CLI mode\n")
+	fmt.Printf("CLI mode\n")
+	fmt.Printf("CLI mode\n")
+	myLog := logger.NewDefaultLogger()
+	myLog.Info("CLI mode")
+}
+
+func guiStart() {
 	app := NewApp()
 
 	// Create application with options
