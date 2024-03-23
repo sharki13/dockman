@@ -36,4 +36,8 @@ require (
 	golang.org/x/text v0.14.0 // indirect
 )
 
+require github.com/sharki13/dockman v0.0.0-00010101000000-000000000000
+
+replace github.com/sharki13/dockman => ./
+
 // replace github.com/wailsapp/wails/v2 v2.8.0 => C:\Users\sharki\go\pkg\mod

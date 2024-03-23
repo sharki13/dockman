@@ -3,20 +3,21 @@ package main
 import (
 	"fmt"
 
-	"github.com/sharki13/dockman/backend/cmd"
+	"github.com/sharki13/dockman/backend/wrapper"
 )
 
 func main() {
-	lsCommand := cmd.Command{
-		Cmd:  "docker",
-		Args: []string{"ps"},
-	}
+	dockerWrapper := wrapper.MakeDockerWrapper()
 
-	out, err := lsCommand.Exec()
+	fmt.Printf("Wrapper type: %s\n", dockerWrapper.GetType())
+
+	instances, err := dockerWrapper.GetInstacnes()
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	fmt.Println(out)
+	for _, instance := range instances {
+		fmt.Println(instance.String())
+	}
 }
