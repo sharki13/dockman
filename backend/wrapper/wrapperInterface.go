@@ -4,14 +4,15 @@ package wrapper
 type WarpperType string
 
 const (
-	DockerWrapperType WarpperType = "docker"
+	DockerWrapperType    WarpperType = "docker"
+	MultipassWrapperType WarpperType = "multipass"
 )
 
 // Wrapper is an interface that represents a virtual machine.
 type Wrapper interface {
 	// returns the type of the virtual machine
 	GetType() WarpperType
-	GetInstacnes() ([]Instance, error)
+	GetInstances() ([]Instance, error)
 }
 
 type StateType string

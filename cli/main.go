@@ -12,7 +12,7 @@ func main() {
 
 	fmt.Printf("Wrapper type: %s\n", dockerWrapper.GetType())
 
-	instances, err := dockerWrapper.GetInstacnes()
+	instances, err := dockerWrapper.GetInstances()
 	if err != nil && err != cmd.Err_CommandNotFound && err != wrapper.Err_DockerNotRunning {
 		fmt.Println(err)
 		return

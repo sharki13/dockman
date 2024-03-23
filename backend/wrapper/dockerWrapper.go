@@ -56,7 +56,7 @@ func (w *DockerWrapper) GetType() WarpperType {
 	return DockerWrapperType
 }
 
-func (w *DockerWrapper) GetInstacnes() ([]Instance, error) {
+func (w *DockerWrapper) GetInstances() ([]Instance, error) {
 	ret := []Instance{}
 
 	out, err := psCommand.Exec()
