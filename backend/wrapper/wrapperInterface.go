@@ -43,7 +43,7 @@ func (i InstanceType) String() string {
 
 const (
 	DockerContainerInstance InstanceType = "docker-container"
-	MultipassInstance       InstanceType = "multipass-instance"
+	MultipassInstance       InstanceType = "multipass-vm"
 )
 
 type Instance struct {

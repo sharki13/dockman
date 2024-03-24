@@ -23,7 +23,7 @@ type model struct {
 func (m model) Init() tea.Cmd { return nil }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	var cmd tea.Cmd
+		var cmd tea.Cmd
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.String() {
@@ -45,14 +45,6 @@ func (m model) View() string {
 
 func main() {
 
-	columns := []table.Column{
-		{Title: "Type", Width: 20},
-		{Title: "Name", Width: 20},
-		{Title: "State", Width: 10},
-	}
-
-	rows := []table.Row{}
-
 	dockerWrapper := wrapper.MakeDockerWrapper()
 	dockerInstances, err := dockerWrapper.GetInstances()
 	if err != nil && err != cmd.Err_CommandNotFound && err != wrapper.Err_DockerNotRunning {
@@ -67,9 +59,16 @@ func main() {
 		return
 	}
 
+	rows := []table.Row{}
 	instances := append(dockerInstances, multipassInstances...)
 	for _, i := range instances {
 		rows = append(rows, table.Row{i.Type.String(), i.Name, i.State.String()})
+	}
+
+	columns := []table.Column{
+		{Title: "Type", Width: 25},
+		{Title: "Name", Width: 25},
+		{Title: "State", Width: 10},
 	}
 
 	t := table.New(
@@ -91,7 +90,7 @@ func main() {
 		Bold(false)
 	t.SetStyles(s)
 
-	m := model{t}
+	m := model{table: t}
 	if _, err := tea.NewProgram(m).Run(); err != nil {
 		fmt.Println("Error running program:", err)
 		os.Exit(1)
