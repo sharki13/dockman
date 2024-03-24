@@ -1,5 +1,7 @@
 package wrapper
 
+import "encoding/json"
+
 // VMType represents the type of a virtual machine.
 type WarpperType string
 
@@ -15,15 +17,22 @@ type Wrapper interface {
 	GetInstances() ([]Instance, error)
 }
 
-type StateType string
+type StateType int
 
 const (
-	StateRunning StateType = "running"
-	StateStopped StateType = "stopped"
+	StateRunning StateType = 1
+	StateStopped StateType = 2
 )
 
 func (s StateType) String() string {
-	return string(s)
+	switch s {
+	case StateRunning:
+		return "Running"
+	case StateStopped:
+		return "Stopped"
+	default:
+		return "Unknown"
+	}
 }
 
 type InstanceType string
@@ -34,6 +43,7 @@ func (i InstanceType) String() string {
 
 const (
 	DockerContainerInstance InstanceType = "docker-container"
+	MultipassInstance       InstanceType = "multipass-instance"
 )
 
 type Instance struct {
@@ -45,4 +55,8 @@ type Instance struct {
 
 func (i *Instance) String() string {
 	return "[" + i.Type.String() + "] " + i.Name + " " + i.State.String()
+}
+
+func (i *Instance) JSON() ([]byte, error) {
+	return json.Marshal(i)
 }
